@@ -8,7 +8,6 @@ import java.net.*;
 // Sempre s'han de cridar des d'un fil secundari (no des del fil de la UI).
 public class Servidor {
 
-
     // Consulta si hi ha una alerta nova per a aquest dispositiu.
     // Retorna el text de l'alerta, o null si no n'hi ha.
     public static String getAlerta(String idDispositiu) {
@@ -29,14 +28,19 @@ public class Servidor {
         try {
             String body = "ID_DISPOSITIU=" + URLEncoder.encode(idDispositiu, "UTF-8")
                     + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8");
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/crear_alerta.php", "POST");
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/create_alerta.php", "POST");
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.getOutputStream().write(body.getBytes("UTF-8"));
-            boolean ok = "OK".equals(llegir(conn));
+
+            String resp = llegir(conn);
+            android.util.Log.d("SERVIDOR", "Respuesta: '" + resp + "'");
+            boolean ok = resp != null && resp.trim().toLowerCase().contains("ok");
+
             conn.disconnect();
             return ok;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -52,9 +56,27 @@ public class Servidor {
 
     // Llig la primera línia de la resposta
     private static String llegir(HttpURLConnection conn) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String resp = br.readLine();
+        // Leer la respuesta del servidor en caso de que este arroje error
+        InputStream inputStream = (conn.getResponseCode() == HttpURLConnection.HTTP_OK)
+                ? conn.getInputStream()
+                : conn.getErrorStream();
+
+        if(inputStream == null){
+            return "";
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+        //String resp = br.readLine();
+
+        StringBuilder completo = new StringBuilder();
+        String linea;
+
+        while ((linea = br.readLine()) != null){
+            completo.append(linea).append("\n");
+        }
+
         br.close();
-        return resp;
+        //return resp;
+        return completo.toString();
     }
 }

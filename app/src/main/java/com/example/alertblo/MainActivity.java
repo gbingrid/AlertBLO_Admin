@@ -1,12 +1,10 @@
 package com.example.alertblo;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         String texto = textoAlerta.getText().toString().trim();
 
         if(texto.isEmpty()){
-            Toast.makeText(this, "Descripción de la alerta: ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error: Debe insertar una descripción.", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -22,7 +22,7 @@
         android:id="@+id/alerta"
         android:layout_width="match_parent"
         android:layout_height="178dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:hint="Introduce la descripción de la alerta.."
         android:visibility="visible" />
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btt_enviar"
         android:textStyle="bold"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:backgroundTint="#000"/>
 
 </LinearLayout>
