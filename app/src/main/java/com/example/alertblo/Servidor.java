@@ -28,19 +28,22 @@ public class Servidor {
         try {
             String body = "ID_DISPOSITIU=" + URLEncoder.encode(idDispositiu, "UTF-8")
                     + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8")
-                    + "&SILENCIO=" + silencio;
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/crear_alerta_silencio.php", "POST");
+                    + "&silencio=" + silencio;
+
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/create_alerta_silencio.php", "POST");
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.getOutputStream().write(body.getBytes("UTF-8"));
             //boolean ok = "OK".equals(llegir(conn));
-            boolean ok = llegir(conn).replace("'", "").trim().equals("OK");
+            boolean ok = llegir(conn).replaceAll("[^a-zA-Z]", "").equalsIgnoreCase("OK");
             conn.disconnect();
             return ok;
         } catch (Exception e) {
             android.util.Log.d("SERVIDOR", "ERROR: " + e.getClass().getName() + " - " + e.getMessage());
             return false;
         }
+
+
     }
 
     // Obre la connexió amb timeout de 5 s
