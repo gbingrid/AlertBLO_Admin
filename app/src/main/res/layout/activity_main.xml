@@ -23,14 +23,26 @@
         android:layout_width="match_parent"
         android:layout_height="178dp"
         android:textSize="20sp"
-        android:hint="Introduce la descripción de la alerta.."
+        android:hint="@string/txt_text_fondo"
+        android:inputType="textMultiLine"
+        android:autofillHints="no"
         android:visibility="visible" />
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_critica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:paddingHorizontal="20dp"
+        android:textSize="20sp"
+        android:text="@string/sw_critica" />
+
     <Button
-        android:id="@+id/crear"
+        android:id="@+id/btt_crear"
         android:layout_width="109dp"
         android:layout_height="wrap_content"
-        android:text="@string/btt_enviar"
+        android:text="@string/txt_crear"
         android:textStyle="bold"
         android:textSize="18sp"
         android:backgroundTint="#000"/>
