@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alert BLO</string>
+    <string name="app_name">AlertBLO</string>
     <string name="txt_appname">AlertBLO Admin</string>
     <string name="txt_alerta">TextView</string>
     <string name="btt_crear">Crear</string>
