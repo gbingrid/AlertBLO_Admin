@@ -1,11 +1,20 @@
 <resources>
-    <string name="app_name">Alert BLO</string>
-    <string name="txt_appname">AlertBLO Admin</string>
-    <string name="txt_alerta">TextView</string>
-    <string name="btt_crear">Crear</string>
+    <string name="app_name" translatable="false">AlertBLO</string>
+    <string name="txt_appname" translatable="false">AlertBLO</string>
+    <string name="txt_alerta" translatable="false">TextView</string>
+    <string name="btt_crear" translatable="false">Crear</string>
     <string name="txt_text_fondo">Introduce la descripción de la alerta..</string>
     <string name="sw_critica">Crítica</string>
-    <string name="txt_crear">Crear</string>
+    <string name="txt_crear" translatable="false">Crear</string>
     <string name="txt_enviarAlerta">Enviar</string>
     <string name="txt_verHistorial">Historial</string>
+    <string-array name="idiomas">
+        <item>Castellano</item>
+        <item>Valenciano</item>
+    </string-array>
+    <string name="txt_salir">salir</string>
+    <string name="txt_confirmar_salir">Confirmar salir</string>
+    <string name="txt_si">Si</string>
+    <string name="txt_cancelar">Cancelar</string>
+    <string name="tit_menu_idioma">Cambiar idioma</string>
 </resources>

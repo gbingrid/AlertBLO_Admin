@@ -1,10 +1,14 @@
 package com.example.alertblo;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.concurrent.ExecutorService;
@@ -17,7 +21,15 @@ public class MainActivity extends AppCompatActivity {
     private Button crearAlerta;
     private EditText textoAlerta;
     private SwitchMaterial tipoAlerta;
+    private Spinner spnIdioma;
+    private ImageButton btnSalir;
 
+
+    // Aplica el idioma antes de que se infle el layout
+    @Override
+    protected void attachBaseContext(Context base){
+        super.attachBaseContext(GestorIdioma.cargarIdiomaGuardado(base));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +40,13 @@ public class MainActivity extends AppCompatActivity {
         crearAlerta = findViewById(R.id.btt_crear);
         textoAlerta = findViewById(R.id.alerta);
         tipoAlerta = findViewById(R.id.sw_critica);
+        spnIdioma = findViewById(R.id.spn_idioma);
+        btnSalir = findViewById(R.id.btn_salir);
 
         crearAlerta.setOnClickListener( v -> crearAlerta());
+        btnSalir.setOnClickListener(v -> mostrarDialogoSalir());
+
+        GestorIdioma.configurarSpinner(spnIdioma, this);
     }
 
     // Crea una nova alerta al servidor
@@ -58,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
             });
         });
     }
+
+    // ALERTDIALOG PARA MOSTRAR DIALOGO SALIR
+    private void mostrarDialogoSalir(){
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.txt_salir))
+                .setMessage(getString(R.string.txt_confirmar_salir))
+                .setPositiveButton(getString(R.string.txt_si), (d, w) -> finishAffinity())
+                .setNegativeButton(getString(R.string.txt_cancelar), null)
+                .show();
+    }
+
 
     // Funció que prepara l'app: obté l'ID del dispositiu, demana permisos i arranca el servei en segon pla.
     private void PrepararApp() {
