@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="fondo_pantalla">#F9F9FB</color>
+    <color name="superficie_tarjeta">#FFFFFF</color>
+    <color name="texto_principal">#1A1A1E</color>
+    <color name="texto_secundario">#636366</color>
+    <color name="alerta_critica">#D32F2F</color>
+    <color name="alerta_aviso">#F57C00</color>
+    <color name="fondo_item">#673AB7</color>
+    <color name="borde">#1A673AB7</color>
 </resources>
