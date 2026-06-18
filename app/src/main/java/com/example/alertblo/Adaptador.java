@@ -142,10 +142,10 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         // Asignar color e icono según el tipo de urgencia
         if (alerta.getTipo() == Alerta.Tipo.CRITICA) {
             h.icono.setImageResource(R.drawable.ic_alerta_critica);
-            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.alerta_critica));
+            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.rojo));
         } else {
-            h.icono.setImageResource(android.R.drawable.ic_dialog_info);
-            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.alerta_aviso));
+            h.icono.setImageResource(R.drawable.ic_notificacion);
+            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.naranja));
         }
 
 

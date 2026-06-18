@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/fondo_pantalla">
+    android:background="@color/fondo">
 
     <TextView
         android:id="@+id/historial"
@@ -15,6 +15,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:paddingBottom="12dp"
+        android:paddingTop="14dp"
         android:textColor="?attr/colorOnSurface" />
 
     <com.google.android.material.chip.ChipGroup
@@ -30,8 +31,9 @@
             android:text="@string/txt_todas"
             android:checked="true"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipIconTint="@color/fondo_item"
-            android:textColor="@color/texto_principal" />
+            app:chipIconTint="@color/azul"
+            app:chipBackgroundColor="@color/chip_selector"
+            android:textColor="@color/chip_texto_selector" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipAlertaCritica"
@@ -39,8 +41,9 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_critica"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipIconTint="@color/fondo_item"
-            android:textColor="@color/texto_principal" />
+            app:chipIconTint="@color/azul"
+            app:chipBackgroundColor="@color/chip_selector"
+            android:textColor="@color/chip_texto_selector" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipAlertaNormal"
@@ -48,8 +51,9 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_aviso"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipIconTint="@color/fondo_item"
-            android:textColor="@color/texto_principal" />
+            app:chipIconTint="@color/azul"
+            app:chipBackgroundColor="@color/chip_selector"
+            android:textColor="@color/chip_texto_selector" />
 
     </com.google.android.material.chip.ChipGroup>
 
