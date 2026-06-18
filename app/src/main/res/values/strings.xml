@@ -17,4 +17,15 @@
     <string name="txt_si">Si</string>
     <string name="txt_cancelar">Cancelar</string>
     <string name="tit_menu_idioma">Cambiar idioma</string>
+    <string name="txt_historial_alertas">Historial</string>
+    <string name="txt_todas">Todas</string>
+    <string name="txt_critica">Criticas</string>
+    <string name="txt_aviso">Avisos</string>
+    <string name="txt_titulo"></string>
+    <string name="txt_descripcion"></string>
+    <string name="txt_fechahora"></string>
+    <string name="tit_inicio">Inicio</string>
+    <string name="tit_historial">Historial</string>
+    <string name="tit_ajustes">Idioma</string>
+    <string name="txt_aceptar">Aceptar</string>
 </resources>

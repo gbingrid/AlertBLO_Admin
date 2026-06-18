@@ -13,4 +13,11 @@
     <string name="txt_si">Si</string>
     <string name="txt_cancelar">Cancel·la</string>
     <string name="tit_menu_idioma">Canviar Idioma</string>
+    <string name="txt_historial_alertas">Historial</string>
+    <string name="txt_todas">Totes</string>
+    <string name="txt_critica">Crítiques</string>
+    <string name="txt_aviso">Avisos</string>
+    <string name="tit_inicio">Inici</string>
+    <string name="tit_historial">Historial</string>
+    <string name="tit_ajustes">Idioma</string>
 </resources>

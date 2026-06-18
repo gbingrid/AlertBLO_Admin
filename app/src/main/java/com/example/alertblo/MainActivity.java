@@ -10,6 +10,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,12 +22,8 @@ public class MainActivity extends AppCompatActivity {
     public static String ID_DISPOSITIU;    // ID del dispositiu que s'enviarà al servidor
     public static final String IP_SERVIDOR = "http://13.63.226.223"; // IP del servidor
     public static ExecutorService netSendThread = Executors.newSingleThreadExecutor();
-    private Button crearAlerta;
-    private EditText textoAlerta;
-    private SwitchMaterial tipoAlerta;
-    private Spinner spnIdioma;
-    private ImageButton btnSalir;
-
+    public static Adaptador adaptador;
+    public static RecyclerView alertasEnviadas;
 
     // Aplica el idioma antes de que se infle el layout
     @Override
@@ -37,43 +37,66 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         PrepararApp();
 
-        crearAlerta = findViewById(R.id.btt_crear);
-        textoAlerta = findViewById(R.id.alerta);
-        tipoAlerta = findViewById(R.id.sw_critica);
-        spnIdioma = findViewById(R.id.spn_idioma);
-        btnSalir = findViewById(R.id.btn_salir);
+        alertasEnviadas = new RecyclerView(this);
+        alertasEnviadas.setLayoutManager(new LinearLayoutManager(this));
+        adaptador = new Adaptador();
 
-        crearAlerta.setOnClickListener( v -> crearAlerta());
-        btnSalir.setOnClickListener(v -> mostrarDialogoSalir());
+        adaptador.cargarAlertasDelDispositivo(this);
+        alertasEnviadas.setAdapter(adaptador);
 
-        GestorIdioma.configurarSpinner(spnIdioma, this);
-    }
-
-    // Crea una nova alerta al servidor
-    private void crearAlerta() {
-        String texto = textoAlerta.getText().toString().trim();
-
-        if(texto.isEmpty()){
-            Toast.makeText(this, "Error: Debe insertar una descripción.", Toast.LENGTH_SHORT).show();
-            return;
+        // Cargar FragmentHome por defecto
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor_fragmentos, new FragmentHome())
+                    .commit();
         }
 
-        int silencio = tipoAlerta.isChecked() ? 0 : 1;
+        // Configurar la barra de navegación inferior
+        BottomNavigationView bottomNavigationView = findViewById(R.id.btn_navegacion);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            androidx.fragment.app.Fragment fragmentSelecionado = null;
+            int id = item.getItemId();
 
-        netSendThread.submit(() -> {
-            // Cridar al servidor per crear l'alerta
-            boolean ok = Servidor.crearAlerta(ID_DISPOSITIU, texto, silencio);
+            if(id == R.id.ic_nav_home){
+                fragmentSelecionado = new FragmentHome();
+            }else if(id == R.id.ic_nav_historial){
+                fragmentSelecionado = new FragmentHistorial();
+            }else if(id == R.id.ic_nav_idioma){
+                mostrarDialogoIdioma();
+                return false;
+            }
 
-            runOnUiThread(() -> {
-                if(ok){
-                    Toast.makeText(this, "Alerta creada.", Toast.LENGTH_SHORT).show();
-                    textoAlerta.setText("");
-                    tipoAlerta.setChecked(false);
-                } else {
-                    Toast.makeText(this, "Error al crear alerta", Toast.LENGTH_SHORT).show();
-                }
-            });
+            if(fragmentSelecionado != null){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contenedor_fragmentos, fragmentSelecionado)
+                        .commit();
+                return true;
+            }
+            return false;
         });
+    }
+
+    private void mostrarDialogoIdioma(){
+        Spinner spinner = new Spinner(this);
+
+        // Añadir margen interno
+        int paddingPx = (int) (16 * getResources().getDisplayMetrics().density);
+        spinner.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+
+        // Usar la clase GestorIdioma pasando el Spinner creado y el Activity
+        GestorIdioma.configurarSpinner(spinner, this);
+
+        // Construir y lanzar AlertDialog
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.tit_menu_idioma))
+                .setView(spinner)
+                .setPositiveButton(getString(R.string.txt_aceptar), (dialog, which) -> {
+                    if(adaptador != null){
+                        adaptador.guardarAlertasEnDispositivo(this);
+                    }
+                    dialog.dismiss();
+                })
+                .show();
     }
 
     // ALERTDIALOG PARA MOSTRAR DIALOGO SALIR
@@ -87,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy(){
+        if(adaptador != null){
+            adaptador.guardarAlertasEnDispositivo(this);
+        }
+        super.onDestroy();
+    }
+
     // Funció que prepara l'app: obté l'ID del dispositiu, demana permisos i arranca el servei en segon pla.
     private void PrepararApp() {
         // Obté l'identificador únic d'aquest dispositiu
@@ -95,5 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 Settings.Secure.ANDROID_ID
         );
 
+    }
+
+    public void mostrarDialogoSalirPublico(){
+        mostrarDialogoSalir();
     }
 }
