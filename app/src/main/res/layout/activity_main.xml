@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/fondo" >
+    android:background="?attr/android:windowBackground" >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_navegacion"
-        android:background="@color/blanco"
         app:menu="@menu/btn_nav_menu"
         app:itemIconTint="@color/nav_selector"
         app:itemTextColor="@color/nav_selector" />

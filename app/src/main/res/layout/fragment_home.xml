@@ -7,7 +7,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="14dp"
-    android:background="@color/fondo" >
+    android:background="?attr/android:windowBackground" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:text="@string/txt_appname"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/texto_principal" />
+            android:textColor="?attr/colorOnSurface" />
 
         <ImageButton
             android:id="@+id/btn_salir"
@@ -50,7 +50,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/txt_salir"
             android:src="@drawable/ic_salir"
-            app:tint="@color/texto_principal" />
+            app:tint="?attr/colorOnSurfaceVariant" />
 
     </RelativeLayout>
 
@@ -60,8 +60,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/azul"
-        app:hintTextColor="@color/azul" >
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:hintTextColor="?attr/colorSurfaceVariant" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/alerta"
@@ -95,8 +95,8 @@
         android:text="@string/txt_crear"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:backgroundTint="@color/azul"
-        android:textColor="@color/amarillo" />
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?attr/colorSecondary" />
 
 </LinearLayout>
 
