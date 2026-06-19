@@ -3,13 +3,13 @@
     <style name="Base.Theme.AlertBLO" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor">@color/fondo_gris</item>
+        <item name="android:statusBarColor">@color/gris_oscuro</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">@color/fondo_gris</item>
+        <item name="android:windowBackground">@color/gris_oscuro</item>
 
-        <item name="colorPrimary">@color/gris</item>
+        <item name="colorPrimary">@color/azul_claro</item>
         <item name="colorSecondary">@color/amarillo</item>
-        <item name="colorOnPrimary">@color/amarillo</item>
+        <item name="colorOnPrimary">@color/amarillo2</item>
 
         <item name="colorOnSecondaryContainer">@color/gris_oscuro</item>
         <item name="colorSecondaryContainer">@color/fondo_tarjeta</item>
@@ -31,10 +31,18 @@
         <item name="elevationOverlayEnabled">false</item>
         <item name="elevationOverlayColor">@android:color/transparent</item>
 
+        <item name="buttonBarPositiveButtonStyle">@style/BotonDialogoSalir</item>
+        <item name="buttonBarNegativeButtonStyle">@style/BotonDialogoSalir</item>
+
         <item name="bottomNavigationStyle">@style/Widget.AlertBLO.BottomNavigationView</item>
     </style>
 
     <style name="Widget.AlertBLO.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">?attr/colorAvisoContainer</item>
     </style>
+
+    <style name="BotonDialogoSalir" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#F3CF55</item>
+    </style>
+
 </resources>

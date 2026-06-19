@@ -2,6 +2,7 @@ package com.example.alertblo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,13 +107,15 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         TextView titulo;
         TextView descripcion;
         TextView fechaHora;
+        com.google.android.material.card.MaterialCardView tarjetaAlerta;
 
-        ViewHolder(View v) {
-            super(v);
-            icono = v.findViewById(R.id.icono_alerta);
-            titulo = v.findViewById(R.id.titulo);
-            descripcion = v.findViewById(R.id.descripcion);
-            fechaHora = v.findViewById(R.id.fechahora);
+        public ViewHolder(@NonNull View itemView){
+            super(itemView);
+            icono = itemView.findViewById(R.id.icono_alerta);
+            titulo = itemView.findViewById(R.id.titulo);
+            descripcion = itemView.findViewById(R.id.descripcion);
+            fechaHora = itemView.findViewById(R.id.fechahora);
+            tarjetaAlerta = itemView.findViewById(R.id.tarjeta_alerta);
         }
     }
 
@@ -134,18 +137,44 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         h.descripcion.setText(alerta.getDescripcion());
         h.fechaHora.setText(alerta.getFechaHora());
 
-        // Asignar colores desde colors.xml
-        h.titulo.setTextColor(ContextCompat.getColor(context, R.color.texto_principal));
-        h.descripcion.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
-        h.fechaHora.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
+        // Crear contenedor temporal para gestión de colores del tema
+        TypedValue typedValue = new TypedValue();
 
-        // Asignar color e icono según el tipo de urgencia
+        // Asignar colores e icono según el tipo de urgencia
         if (alerta.getTipo() == Alerta.Tipo.CRITICA) {
             h.icono.setImageResource(R.drawable.ic_alerta_critica);
-            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.rojo));
+
+            // Obtener colorAlertaCritica para icono y título
+            context.getTheme().resolveAttribute(R.attr.colorAlertaCritica, typedValue, true);
+            int colorTextAlertCritica = typedValue.data;
+            h.icono.setColorFilter(colorTextAlertCritica);
+            h.titulo.setTextColor(colorTextAlertCritica);
+
+            // Obtener color naranja claro del borde para la tarjeta
+            context.getTheme().resolveAttribute(R.attr.colorAlertaCriticaContainer, typedValue, true);
+            h.tarjetaAlerta.setStrokeColor(typedValue.data);
+
         } else {
             h.icono.setImageResource(R.drawable.ic_notificacion);
-            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.naranja));
+
+            // Obtener colorAviso para icono y título
+            context.getTheme().resolveAttribute(R.attr.colorAviso, typedValue, true);
+            int colorTextAviso = typedValue.data;
+            h.icono.setColorFilter(colorTextAviso);
+            h.titulo.setTextColor(colorTextAviso);
+
+            // Obtener color rojo claro del borde para la tarjeta
+            context.getTheme().resolveAttribute(R.attr.colorAvisoContainer, typedValue, true);
+            h.tarjetaAlerta.setStrokeColor(typedValue.data);
+
+        }
+
+        if(context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurface, typedValue, true)){
+            h.descripcion.setTextColor(typedValue.data);
+        }
+
+        if(context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, typedValue, true)){
+            h.fechaHora.setTextColor(typedValue.data);
         }
 
 

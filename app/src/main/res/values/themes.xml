@@ -10,6 +10,7 @@
         <item name="colorPrimary">@color/azul</item>
         <item name="colorOnPrimary">@color/blanco</item>
         <item name="colorSecondary">@color/azul</item>
+        <item name="colorOnSecondary">@color/amarillo</item>
 
         <item name="colorOnSecondaryContainer">@color/gris</item>
         <item name="colorSecondaryContainer">@color/gris_claro</item>
