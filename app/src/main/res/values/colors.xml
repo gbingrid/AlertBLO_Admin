@@ -12,6 +12,7 @@
     <color name="fondo_tarjeta">#222326</color>
     <color name="azul_claro">#344955</color>
     <color name="amarillo2">#F3CF55</color>
+    <color name="fondo_gris_oscuro">#161616</color>
 
     <!-- Texto -->
     <color name="azul_oscuro">#0A1128</color>
