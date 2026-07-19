@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.alertblo"
+    namespace = "com.admin.alertblo"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.alertblo"
+        applicationId = "com.admin.alertblo"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
